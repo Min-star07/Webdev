@@ -1,3 +1,3 @@
 #!/bin/bash
-./Run_Getfigure -ROB 15 -CH 58
+./Run_Getfigure -ROB 15 -CH 53
 

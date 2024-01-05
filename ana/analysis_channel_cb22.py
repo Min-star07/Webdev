@@ -117,7 +117,7 @@ for ROB in [15]:
             linewidth=2,
             weights=normalized_bin_contents3,
             histtype="step",
-            label="mode LED wiki",
+            label="mode LED wilki",
         )  # Plotting histogram using bin edges and values
         plt.hist(
             bin_edges4[:-1],
@@ -125,7 +125,7 @@ for ROB in [15]:
             linewidth=2,
             weights=normalized_bin_contents4,
             histtype="step",
-            label="mode: PED wiki",
+            label="mode: PED wilki",
         )  # Plotting histogram using bin edges and values
 
         plt.legend()
@@ -133,7 +133,7 @@ for ROB in [15]:
 
         histname = hist
         print(ROB, histname)
-        plt.xlim(0, 40)
+        plt.xlim(0, 80)
         plt.title(histname)
         pdf_pages.savefig()  # Save each figure to the PDF file
         plt.close()

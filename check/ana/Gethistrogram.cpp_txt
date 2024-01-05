@@ -20,7 +20,7 @@ int main (int argc, char** argv){
     //set initial parmeters
     TString rootfile;
     TString inputfilename;
-    TString rob_id = "2";
+    string rob_id = "2";
     TString channel_id = "2";
     TString sigma_id = "2";
 
@@ -32,9 +32,10 @@ int main (int argc, char** argv){
             channel_id = argv[i+1];
         }
     }
+
     TString ROB_id = rob_id;
     TString CH = channel_id;
-
+    int ROB_id_new = atoi(rob_id.c_str());
     TString pathDir1 = "../Result";
     TString pathDir2 = "./Final_Result";
     rootfile = pathDir1 + "/fit_result_ROB_"+ ROB_id +".root";
@@ -100,7 +101,7 @@ int main (int argc, char** argv){
     for (int i = -3; i < 4; i ++)
     {
         TString histname;
-        if (ROB_id < 10)
+        if (ROB_id_new < 10)
         {
             if (CH < 10)
                 histname = "h_charge_ROB0" + ROB_id + "_ch0" + CH + "_sigma_" + i;

@@ -59,3 +59,71 @@ plt.ylabel("Channel")
 plt.title(r"ROB_" + str(ROB) + "_Q$_{1}$_distribution_Ratio")
 plt.savefig("Result/ROB_" + str(ROB) + "_Q1_ratio.pdf")
 plt.show()
+
+
+##################################################################################################################################################
+y_mean = np.mean(result)
+y_std = np.std(result)
+xrange = (0, 40)
+bins = 80
+# Create a histogram from the data
+hist, bin_edges = np.histogram(result, range=xrange, bins=bins, density=False)
+print(hist)
+print(bin_edges)
+
+# Get the bin centers
+bin_centers = (bin_edges[:-1] + bin_edges[1:]) / 2
+# Fit the histogram data to the double Gaussian function
+popt, pcov = curve_fit(gaussian, bin_centers, hist, p0=[40, 12, 4])
+print("Fitted parameters:", popt)
+# Get observed data (bin contents) from the histogram
+observed_data = hist  # Replace this with your actual histogram data
+# Calculate expected values using the fitted model
+expected_data = gaussian(
+    bin_centers, 3.74426499, 12.02203955, 0.49898672
+)  # Replace bin_centers with your bin centers
+
+
+# Calculate chi-squared
+residuals = observed_data - expected_data
+chi_squared = np.sum(residuals**2)
+
+# Calculate degrees of freedom
+num_params = 3
+num_bins = len(observed_data)
+ndf = num_bins - num_params
+
+# Calculate chi-squared per degree of freedom
+chi_squared_ndf = chi_squared / ndf
+
+print(f"Chi-squared: {chi_squared}")
+print(f"Degrees of freedom: {ndf}")
+print(f"Chi-squared per degree of freedom: {chi_squared_ndf}")
+
+ax = plt.axes(
+    xlim=[0, 30],
+    ylim=[0, 15],
+    xlabel=r"FADC / Wilkinson ADC ",
+    ylabel="# of events [/0.5]",
+)  # r"$\\frac{{\\chi^2}}{{\\text{{NDF}}}}"
+plt.hist(
+    result,
+    range=xrange,
+    bins=bins,
+    label="Q$_{1}$: mean = %.1f, std = %.1f" % (y_mean, y_std),
+)
+plt.plot(
+    bin_centers,
+    gaussian(bin_centers, *popt),
+    "r-",
+    linewidth=2,
+    label=r"fit : $\mu$ = %.1f, $\sigma$ = %.1f" % (popt[1], popt[2]),
+)  # Plotting the fitted curve
+
+# Add text at a relative position (using relative coordinates)
+# plt.text(0.6, 0.6, 'Relative Text', fontsize=12, color='blue', transform=plt.gca().transAxes)
+
+plt.title("ROB " + str(ROB))
+plt.legend()
+plt.savefig("Result/ROB_" + str(ROB) + "_Q1_mean_ratio.pdf")
+plt.show()

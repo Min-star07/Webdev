@@ -57,6 +57,7 @@ int main(int argc, char** argv){
     TString filename_PED = ped_rootfile;
     
     TString ROB_id = rob_id;
+    int ROB_id_new = atoi(rob_id.c_str());
     int Chanel_start = atoi(channel_start.c_str());
     int Chanel_end = atoi(channel_end.c_str());
     // int Sigma = atoi(sigma.c_str());
@@ -107,7 +108,7 @@ int main(int argc, char** argv){
     //for(int id = 7;id < 8; id ++){
     // Get the histogram from the file
     TString histname;
-    if (ROB_id <10){
+    if (ROB_id_new <10){
         if (id < 10)
         histname = "h_charge_ROB0" + ROB_id + "_ch0" + id;
         else
@@ -156,7 +157,7 @@ int main(int argc, char** argv){
         int entries_number = histogram->Integral();
         // func[i]->SetParameters(55000, ped_gauss[0], 12, ped_gauss[1], 10, 0.1, 0.2, 1.0);
         double mu_init = 0.007 * fitMax;
-        func[i]->SetParameters(entries_number, ped_gauss[0], 11, ped_gauss[1], 10, 0.1, 0.2, 0.5);
+        func[i]->SetParameters(entries_number, ped_gauss[0], 12, ped_gauss[1], 11, 0.1, 0.2, 0.5);
         // func[i]->SetParameters(entries_number, 20, 12, 1, 10, 0.1, 0.2, 0.5);
         func[i]->SetParNames("N_{0}","Q_{0}","Q_{1}", "#sigma_{0}","#sigma_{1}", "w","#alpha", "#mu");
         // func[i]->FixParameter(0, histogram->Integral());
