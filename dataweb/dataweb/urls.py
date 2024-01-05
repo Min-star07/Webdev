@@ -15,9 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from web import views
+from web import views, ttmodule,other
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('login/', views.login),
-    path ('index/', views.index)
+    path ('login/', views.login),
+    path ('logout/', views.logout),
+    path ('home/', views.index),
+    path ('tt_telescope_chart/', views.tt_telescope_chart),
+    path ('tt_telescope_table/', views.tt_telescope_table),
+    path ('tt_module/', ttmodule.tt_module),
+    path ('chart/bar/', ttmodule.chart_bar),
+    path ('tt_table/', views.tt_table),
+    path ('useful_link/', other.useful),
+    path ('gallery_link/', other.gallery1),
+    path ('video_link/', other.video1),
+    path ('interesting_link/', other.int_link),
 ]
