@@ -26,28 +26,45 @@ for ROB in range(8):
     # print(filepath6)
 
     filename = "fit_result_ROB_" + str(ROB) + ".root"
-    path1  = "../Result_test1/"+ filename
-    path3  = "../Result_test3/"+ filename
-    path5  = "../Result_test5/"+ filename
-    path6  = "../Result_test6/"+ filename
-    #Create a PdfPages object to save figures into a PDF file
-    ax = plt.axes(xlim=[0,250], ylim =[0.1,100000], yscale="log", xlabel='ADC', ylabel=r'count') #r"$\\frac{{\\chi^2}}{{\\text{{NDF}}}}" 
-    for i in range(64):
+    path1 = "../TTtele/Result_test1/" + filename
+    path3 = "../TTtele/Result_test3/" + filename
+    path5 = "../TTtele/Result_test5/" + filename
+    path6 = "../TTtele/Result_test6/" + filename
+    # Create a PdfPages object to save figures into a PDF file
+    ax = plt.axes(
+        xlim=[0, 250], ylim=[0.1, 100000], yscale="log", xlabel="ADC", ylabel=r"count"
+    )  # r"$\\frac{{\\chi^2}}{{\\text{{NDF}}}}"
+    for i in range(4):
         with uproot.open(path5) as file:
-                # print(df5.iloc[i,7])
-                sigma = df5.iloc[i,7]
-                if i < 10:
-                    hist = "h_charge_ROB0" +str(ROB)+"_ch0"+str(i)+"_sigma_"+str(sigma)
-                else:
-                    hist = "h_charge_ROB0" +str(ROB)+"_ch"+str(i)+"_sigma_"+str(sigma)
-                bin_values5, bin_edges5 = file[hist].to_numpy()
-                integral5 = bin_values5.sum()
-                # Normalize the histogram
-                normalized_bin_contents5 = bin_values5 / integral5 * 100000
-                plt.hist(bin_edges5[:-1], bins=bin_edges5, weights=normalized_bin_contents5,histtype ="step",label="data 3-2")  # Plotting histogram using bin edges and values
-                # plt.legend() 
-    title = "h_charge_ROB0" +str(ROB)      
-    print(ROB , title)
+            # print(df5.iloc[i,7])
+            sigma = df5.iloc[i, 7]
+            if i < 10:
+                hist = (
+                    "h_charge_ROB0"
+                    + str(ROB)
+                    + "_ch0"
+                    + str(i)
+                    + "_sigma_"
+                    + str(sigma)
+                )
+            else:
+                hist = (
+                    "h_charge_ROB0" + str(ROB) + "_ch" + str(i) + "_sigma_" + str(sigma)
+                )
+            bin_values5, bin_edges5 = file[hist].to_numpy()
+            integral5 = bin_values5.sum()
+            # Normalize the histogram
+            normalized_bin_contents5 = bin_values5 / integral5 * 100000
+            plt.hist(
+                bin_edges5[:-1],
+                bins=bin_edges5,
+                weights=normalized_bin_contents5,
+                histtype="step",
+                label="data 3-2",
+            )  # Plotting histogram using bin edges and values
+            # plt.legend()
+    title = "h_charge_ROB0" + str(ROB)
+    print(ROB, title)
     plt.title(title)
-    plt.savefig("ROB"+str(ROB)+"_all_chanel.pdf")
+    plt.savefig("Result/ROB" + str(ROB) + "_all_chanel.pdf")
     plt.close()
