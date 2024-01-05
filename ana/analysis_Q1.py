@@ -17,7 +17,7 @@ def gaussian(x, a1, b1, c1):
 
 
 df = pd.read_csv(
-    "Final_Result_test7/ROB_" + str(ROB) + "_final_result.txt",
+    "Final_Result_test7_2/ROB_" + str(ROB) + "_final_result.txt",
     sep="\t",
     engine="python",
 )
@@ -60,7 +60,7 @@ plt.axhline(y=3, color="blue", linestyle="--")  # Horizontal line at y_max
 # plt.axvline(x=2, color='green', linestyle='-.', linewidth=2)  # Vertical line at x=2
 plt.title("ROB " + str(ROB))
 plt.legend()
-plt.savefig("Final_Result_test7/ROB_" + str(ROB) + "_Q1vsChannel1.pdf")
+plt.savefig("Final_Result_test7_2/ROB_" + str(ROB) + "_Q1vsChannel1.pdf")
 plt.show()
 
 ##################################################################################################################################################
@@ -122,12 +122,13 @@ plt.plot(
 
 plt.title("ROB " + str(ROB))
 plt.legend()
-plt.savefig("Final_Result_test7/ROB_" + str(ROB) + "_Q1_mean.pdf")
+plt.savefig("Final_Result_test7_2/ROB_" + str(ROB) + "_Q1_mean.pdf")
 plt.show()
 
 ###############################################################################################################
 # Generate sample data for a 8x8 grid (replace this with your data)
 numbers = list(df["Q_{1}"])
+print(numbers)
 # Reshape the list into an 8x8 array
 array_8x8 = np.array(numbers).reshape(8, 8)
 data = array_8x8
@@ -146,5 +147,5 @@ plt.colorbar(label=r"Q$_{1}$ value")
 plt.xlabel("Channel")
 plt.ylabel("Channel")
 plt.title(r"ROB_" + str(ROB) + "_Q$_{1}$_distribution")
-plt.savefig("Final_Result_test7/ROB_" + str(ROB) + "_Q1vsChannel2.pdf")
+plt.savefig("Final_Result_test7_2/ROB_" + str(ROB) + "_Q1vsChannel2.pdf")
 plt.show()

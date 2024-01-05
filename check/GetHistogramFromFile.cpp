@@ -22,8 +22,8 @@ using namespace std;
 
 int main(int argc, char** argv){
     //set initial parmeters
-    string led_rootfile = "../data/led_cCB-19_2023-11-10_10_50_hist.root";
-    string ped_rootfile = "../data/ped_cCB-19_2023-11-10_10_49_hist.root";
+    string led_rootfile = "../TTtele/data/led_cCB-19_2023-11-10_10_50_hist.root";
+    string ped_rootfile = "../TTtele/data/ped_cCB-19_2023-11-10_10_49_hist.root";
     string rob_id = "1";
     string channel_start = "0";
     string channel_end = "64";
@@ -156,7 +156,7 @@ int main(int argc, char** argv){
         int entries_number = histogram->Integral();
         // func[i]->SetParameters(55000, ped_gauss[0], 12, ped_gauss[1], 10, 0.1, 0.2, 1.0);
         double mu_init = 0.007 * fitMax;
-        func[i]->SetParameters(entries_number, ped_gauss[0], 12, ped_gauss[1], 10, 0.1, 0.2, 0.5);
+        func[i]->SetParameters(entries_number, ped_gauss[0], 11, ped_gauss[1], 10, 0.1, 0.2, 0.5);
         // func[i]->SetParameters(entries_number, 20, 12, 1, 10, 0.1, 0.2, 0.5);
         func[i]->SetParNames("N_{0}","Q_{0}","Q_{1}", "#sigma_{0}","#sigma_{1}", "w","#alpha", "#mu");
         // func[i]->FixParameter(0, histogram->Integral());
